@@ -10,7 +10,7 @@ source:
   sha256: d27495d8ca7707d846f8c026ab695123c7c78c7860f04e2c002e483080418d8d
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win]
 
 requirements:
@@ -33,7 +33,6 @@ about:
   license_family: GPL
   license_file: COPYING
   summary: 'A tool for the generation of events in high-energy collisions'
-
   description: |
       The Pythia program is a standard tool for the generation of events in
       high-energy collisions, comprising a coherent set of physics models for
@@ -46,5 +45,6 @@ about:
 
 extra:
   recipe-maintainers:
-    - henryiii
     - chrisburr
+    - henryiii
+    - ph-ilten
