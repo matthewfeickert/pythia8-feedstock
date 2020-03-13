@@ -1,5 +1,5 @@
 {% set name = "pythia8" %}
-{% set version = "8.2.44" %}
+{% set version = "8.244" %}
 
 package:
   name: {{ name|lower }}
