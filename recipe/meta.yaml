@@ -23,6 +23,7 @@ requirements:
     - {{ compiler('cxx') }}
     - rsync
     - make
+    - sed
   host:
     - python
   run:
