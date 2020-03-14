@@ -14,7 +14,8 @@ build:
   skip: True  # [win]
   run_exports:
     # https://abi-laboratory.pro/?view=timeline&l=root
-    - {{ pin_subpackage('pythia8', max_pin='x.x.x') }}
+    - pythia8 >={{ version }},<{{ version.split('.')[0] }}.{{ (version.split('.')[1][0]|int) + 1 }}00.0a0
+    # Can't use pin_subpackage as X.Y.Z is written as X.YZ
 
 requirements:
   build:
