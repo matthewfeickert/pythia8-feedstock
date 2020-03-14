@@ -1,5 +1,5 @@
 {% set name = "pythia8" %}
-{% set version = "8.244" %}
+{% set version = "8.301" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: http://home.thep.lu.se/~torbjorn/{{ name }}/pythia{{ version|replace('.', '')  }}.tgz
-  sha256: e34880f999daf19cdd893a187123927ba77d1bf851e30f6ea9ec89591f4c92ca
+  sha256: b18e16f69b15112e81f9bb7bda36f4bfaa6f16f02c9e8dfe6fc177077608dc35
 
 build:
   number: 0
