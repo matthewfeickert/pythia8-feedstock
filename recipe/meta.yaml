@@ -1,5 +1,5 @@
 {% set name = "pythia8" %}
-{% set version = "8.240" %}
+{% set version = "8.244" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,15 @@ package:
 
 source:
   url: http://home.thep.lu.se/~torbjorn/{{ name }}/pythia{{ version|replace('.', '')  }}.tgz
-  sha256: d27495d8ca7707d846f8c026ab695123c7c78c7860f04e2c002e483080418d8d
+  sha256: e34880f999daf19cdd893a187123927ba77d1bf851e30f6ea9ec89591f4c92ca
 
 build:
-  number: 4
+  number: 0
   skip: True  # [win]
+  run_exports:
+    # https://abi-laboratory.pro/?view=timeline&l=root
+    - pythia8 >={{ version }},<{{ version.split('.')[0] }}.{{ (version.split('.')[1][0]|int) + 1 }}00.0a0
+    # Can't use pin_subpackage as X.Y.Z is written as X.YZ
 
 requirements:
   build:
