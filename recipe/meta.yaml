@@ -7,7 +7,7 @@ package:
 
 source:
   url: http://home.thep.lu.se/~torbjorn/{{ name }}/pythia{{ version|replace('.', '')  }}.tgz
-  sha256: b18e16f69b15112e81f9bb7bda36f4bfaa6f16f02c9e8dfe6fc177077608dc35
+  sha256: 51382768eb9aafb97870dca1909516422297b64ef6a6b94659259b3e4afa7f06
 
 build:
   number: 0
