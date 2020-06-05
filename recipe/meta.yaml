@@ -6,11 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  url: http://home.thep.lu.se/~torbjorn/{{ name }}/pythia{{ version|replace('.', '')  }}.tgz
+  url: http://home.thep.lu.se/~torbjorn/{{ name }}/pythia{{ version|replace('.', '') }}.tgz
   sha256: e34880f999daf19cdd893a187123927ba77d1bf851e30f6ea9ec89591f4c92ca
+  patches:
+    - patches/fix-dlsym-definition.patch
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win]
   run_exports:
     # https://abi-laboratory.pro/?view=timeline&l=root
@@ -34,8 +36,7 @@ test:
 
 about:
   home: http://home.thep.lu.se/Pythia/
-  license: GPL-2.0
-  license_family: GPL
+  license: GPL-2.0-only
   license_file: COPYING
   summary: 'A tool for the generation of events in high-energy collisions'
   description: |
