@@ -3,7 +3,7 @@ About pythia8
 
 Home: http://home.thep.lu.se/Pythia/
 
-Package license: GPL-2.0
+Package license: GPL-2.0-only
 
 Feedstock license: BSD 3-Clause
 
@@ -34,7 +34,7 @@ Current build status
     <td>Drone</td>
     <td>
       <a href="https://cloud.drone.io/conda-forge/pythia8-feedstock">
-        <img alt="linux" src="https://img.shields.io/drone/build/conda-forge/master.svg?label=Linux">
+        <img alt="linux" src="https://img.shields.io/drone/build/conda-forge/pythia8-feedstock/master.svg?label=Linux">
       </a>
     </td>
   </tr>
@@ -93,13 +93,6 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_python2.7.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=6141&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pythia8-feedstock?branchName=master&jobName=linux&configuration=linux_python2.7.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>linux_python3.6.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=6141&branchName=master">
@@ -118,13 +111,6 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=6141&branchName=master">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pythia8-feedstock?branchName=master&jobName=linux&configuration=linux_python3.8.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_python2.7.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=6141&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pythia8-feedstock?branchName=master&jobName=osx&configuration=osx_python2.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
