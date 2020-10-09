@@ -12,7 +12,7 @@ source:
     - patches/fix-dlsym-definition.patch
 
 build:
-  number: 1
+  number: 2
   skip: True  # [win]
   run_exports:
     # https://abi-laboratory.pro/?view=timeline&l=root
