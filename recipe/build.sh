@@ -13,6 +13,10 @@ else
     EXTRAS=""
 fi
 
+# Use pybind11 from conda-forge
+sed -i 's@overload_caster_t@override_caster_t@g' plugins/python/src/*.cpp
+rm -rf plugins/python/include/pybind11
+
 ./configure \
     --with-python-include="$(python -c "from sysconfig import get_paths; info = get_paths(); print(info['include'])")" \
     --with-python-bin="${PREFIX}/bin/" \
