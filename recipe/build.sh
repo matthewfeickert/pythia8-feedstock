@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-if [ "$(uname)" == "Linux" ]; then
+if [[ "${target_platform}" == linux-* ]]; then
     PYTHIA_ARCH=LINUX
 else
     PYTHIA_ARCH=DARWIN
@@ -16,6 +16,7 @@ fi
 # Use pybind11 from conda-forge
 sed -i 's@overload_caster_t@override_caster_t@g' plugins/python/src/*.cpp
 rm -rf plugins/python/include/pybind11
+ln -s $PREFIX/include/pybind11 $PWD/plugins/python/include/pybind11
 
 ./configure \
     --with-python-include="$(python -c "from sysconfig import get_paths; info = get_paths(); print(info['include'])")" \
