@@ -1,5 +1,5 @@
 {% set name = "pythia8" %}
-{% set version = "8.244" %}
+{% set version = "8.303" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,10 @@ package:
 
 source:
   url: http://home.thep.lu.se/~torbjorn/{{ name }}/pythia{{ version|replace('.', '') }}.tgz
-  sha256: e34880f999daf19cdd893a187123927ba77d1bf851e30f6ea9ec89591f4c92ca
-  patches:
-    - patches/fix-dlsym-definition.patch
+  sha256: cd7c2b102670dae74aa37053657b4f068396988ef7da58fd3c318c84dc37913e
 
 build:
-  number: 2
+  number: 0
   skip: True  # [win]
   run_exports:
     # https://abi-laboratory.pro/?view=timeline&l=root
@@ -27,8 +25,10 @@ requirements:
     - {{ compiler('cxx') }}
     - rsync
     - make
+    - sed
   host:
     - python
+    - pybind11
   run:
     - python
 

@@ -1,6 +1,7 @@
+#!/usr/bin/env bash
 set -e
 
-if [ "$(uname)" == "Linux" ]; then
+if [[ "${target_platform}" == linux-* ]]; then
     PYTHIA_ARCH=LINUX
 else
     PYTHIA_ARCH=DARWIN
@@ -11,6 +12,11 @@ if [ "${ARCH}" == "64" ]; then
 else
     EXTRAS=""
 fi
+
+# Use pybind11 from conda-forge
+sed -i 's@overload_caster_t@override_caster_t@g' plugins/python/src/*.cpp
+rm -rf plugins/python/include/pybind11
+ln -s $PREFIX/include/pybind11 $PWD/plugins/python/include/pybind11
 
 ./configure \
     --with-python-include="$(python -c "from sysconfig import get_paths; info = get_paths(); print(info['include'])")" \
@@ -23,13 +29,7 @@ fi
 make install -j${CPU_COUNT}
 
 # Make links so conda can find the bindings
-ln -s "${PREFIX}/lib/pythia8.py" "${SP_DIR}/"
-if [ "$(uname)" == "Linux" ]; then
-    ln -s "${PREFIX}/lib/libpythia8.so" "${SP_DIR}/"
-else
-    ln -s "${PREFIX}/lib/libpythia8.dylib" "${SP_DIR}/"
-fi
-ln -s "${PREFIX}/lib/_pythia8.so" "${SP_DIR}/"
+ln -s "${PREFIX}/lib/pythia8.so" "${SP_DIR}/"
 
 # Add the post activate/deactivate scripts
 mkdir -p "${PREFIX}/etc/conda/activate.d"
