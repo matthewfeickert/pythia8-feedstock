@@ -1,13 +1,13 @@
 {% set name = "pythia8" %}
-{% set version = "8.301" %}
+{% set version = "8.303" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: http://home.thep.lu.se/~torbjorn/{{ name }}/pythia{{ version|replace('.', '')  }}.tgz
-  sha256: 51382768eb9aafb97870dca1909516422297b64ef6a6b94659259b3e4afa7f06
+  url: http://home.thep.lu.se/~torbjorn/{{ name }}/pythia{{ version|replace('.', '') }}.tgz
+  sha256: cd7c2b102670dae74aa37053657b4f068396988ef7da58fd3c318c84dc37913e
 
 build:
   number: 0
@@ -35,8 +35,7 @@ test:
 
 about:
   home: http://home.thep.lu.se/Pythia/
-  license: GPL-2.0
-  license_family: GPL
+  license: GPL-2.0-only
   license_file: COPYING
   summary: 'A tool for the generation of events in high-energy collisions'
   description: |
