@@ -1,5 +1,5 @@
 {% set name = "pythia8" %}
-{% set version = "8.303" %}
+{% set version = "8.304" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: http://home.thep.lu.se/~torbjorn/{{ name }}/pythia{{ version|replace('.', '') }}.tgz
-  sha256: cd7c2b102670dae74aa37053657b4f068396988ef7da58fd3c318c84dc37913e
+  sha256: d3897018fb6d545eaf93bf43f32580c984a9bff49259d9dd29dff6edfbe9d9a1
 
 build:
   number: 0
-  skip: True  # [win]
+  skip: true  # [win]
   run_exports:
     # https://abi-laboratory.pro/?view=timeline&l=root
     - pythia8 >={{ version }},<{{ version.split('.')[0] }}.{{ (version.split('.')[1][0]|int) + 1 }}00.0a0
@@ -40,16 +40,16 @@ about:
   home: http://home.thep.lu.se/Pythia/
   license: GPL-2.0-only
   license_file: COPYING
-  summary: 'A tool for the generation of events in high-energy collisions'
+  summary: A tool for the generation of events in high-energy collisions
   description: |
-      The Pythia program is a standard tool for the generation of events in
-      high-energy collisions, comprising a coherent set of physics models for
-      the evolution from a few-body hard process to a complex multiparticle
-      final state. It contains a library of hard processes, models for initial-
-      and final-state parton showers, matching and merging methods between hard
-      processes and parton showers, multiparton interactions, beam remnants,
-      string fragmentation and particle decays. It also has a set of utilities
-      and several interfaces to external programs.
+    The Pythia program is a standard tool for the generation of events in
+    high-energy collisions, comprising a coherent set of physics models for
+    the evolution from a few-body hard process to a complex multiparticle
+    final state. It contains a library of hard processes, models for initial-
+    and final-state parton showers, matching and merging methods between hard
+    processes and parton showers, multiparton interactions, beam remnants,
+    string fragmentation and particle decays. It also has a set of utilities
+    and several interfaces to external programs.
 
 extra:
   recipe-maintainers:
