@@ -1,16 +1,17 @@
 {% set name = "pythia8" %}
-{% set version = "8.305" %}
+{% set file_version = "8306" %}
+{% set version = file_version[0] + "." + file_version[:1] %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: http://home.thep.lu.se/~torbjorn/{{ name }}/pythia{{ version|replace('.', '') }}.tgz
-  sha256: 2a885f8b07f2d173e2f4cb14c95e0433f7d4cdb0eeea00dd09e2985e97f0370f
+  url: https://pythia.org/download/pythia83/pythia{{ file_version }}.tgz
+  sha256: 734803b722b1c1b53c8cf2f0d3c30747c80fc2dde5e0ba141bc9397dad37a8f6
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win]
   run_exports:
     # https://abi-laboratory.pro/?view=timeline&l=root
