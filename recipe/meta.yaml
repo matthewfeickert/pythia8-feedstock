@@ -10,7 +10,7 @@ source:
   sha256: 2a885f8b07f2d173e2f4cb14c95e0433f7d4cdb0eeea00dd09e2985e97f0370f
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   run_exports:
     # https://abi-laboratory.pro/?view=timeline&l=root
