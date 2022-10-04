@@ -1,6 +1,6 @@
 {% set name = "pythia8" %}
-{% set file_version = "8306" %}
-{% set version = file_version[0] + "." + file_version[:1] %}
+{% set file_version = "8307" %}
+{% set version = file_version[0] + "." + file_version[1:] %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pythia.org/download/pythia83/pythia{{ file_version }}.tgz
-  sha256: 734803b722b1c1b53c8cf2f0d3c30747c80fc2dde5e0ba141bc9397dad37a8f6
+  sha256: e5b14d44aa5943332e32dd5dda9a18fdd1a0085c7198e28d840e04167fa6013d
 
 build:
   number: 0
