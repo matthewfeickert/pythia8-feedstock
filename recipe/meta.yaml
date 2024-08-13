@@ -30,6 +30,7 @@ requirements:
     - sed
   host:
     - python
+    - libxcrypt  # [linux and py<39]
     - pybind11
   run:
     - python
