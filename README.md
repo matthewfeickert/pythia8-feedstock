@@ -3,7 +3,7 @@ About pythia8-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/pythia8-feedstock/blob/main/LICENSE.txt)
 
-Home: http://home.thep.lu.se/Pythia/
+Home: https://pythia.org/
 
 Package license: GPL-2.0-only
 

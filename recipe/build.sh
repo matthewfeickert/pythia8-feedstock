@@ -18,6 +18,15 @@ sed -i 's@overload_caster_t@override_caster_t@g' plugins/python/src/*.cpp
 rm -rf plugins/python/include/pybind11
 ln -s $PREFIX/include/pybind11 $PWD/plugins/python/include/pybind11
 
+# Have the compiler look for crypt.h in the conda include directory
+# for Python 3.8 builds
+# c.f. https://github.com/conda-forge/linux-sysroot-feedstock/issues/52
+if [[ "${target_platform}" == linux-* ]]; then
+    if [[ $(python -c "import sys; print(sys.version_info[:2] < (3, 9))") == "True" ]]; then
+        export CPATH="${PREFIX}/include:${CPATH}"
+    fi
+fi
+
 ./configure \
     --with-python-include="$(python -c "from sysconfig import get_paths; info = get_paths(); print(info['include'])")" \
     --with-python-bin="${PREFIX}/bin/" \
