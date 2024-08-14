@@ -7,12 +7,6 @@ else
     PYTHIA_ARCH=DARWIN
 fi
 
-if [ "${ARCH}" == "64" ]; then
-    EXTRAS="--enable-64bit"
-else
-    EXTRAS=""
-fi
-
 # Use pybind11 from conda-forge
 sed -i 's@overload_caster_t@override_caster_t@g' plugins/python/src/*.cpp
 rm -rf plugins/python/include/pybind11
@@ -30,10 +24,12 @@ fi
 ./configure \
     --with-python-include="$(python -c "from sysconfig import get_paths; info = get_paths(); print(info['include'])")" \
     --with-python-bin="${PREFIX}/bin/" \
-    --arch=${PYTHIA_ARCH} \
-    --enable-shared \
-    --prefix=${PREFIX} \
-    ${EXTRAS}
+    --arch="${PYTHIA_ARCH}" \
+    --prefix="${PREFIX}" \
+    --with-lhapdf6-bin="${PREFIX}/bin/" \
+    --with-lhapdf6-include="${PREFIX}/include/" \
+    --with-gzip-include="${PREFIX}/include/" \
+    --with-mg5mes
 
 make install -j${CPU_COUNT}
 
