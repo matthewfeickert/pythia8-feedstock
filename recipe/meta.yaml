@@ -1,5 +1,5 @@
 {% set name = "pythia8" %}
-{% set file_version = "8310" %}
+{% set file_version = "8311" %}
 {% set version = file_version[0] + "." + file_version[1:] %}
 
 package:
@@ -7,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pythia.org/download/pythia83/pythia{{ file_version }}.tgz
-  sha256: 90c811abe7a3d2ffdbf9b4aeab51cf6e0a5a8befb4e3efa806f3d5b9c311e227
+  url: https://gitlab.com/Pythia8/releases/-/archive/pythia{{ file_version }}/releases-pythia{{ file_version }}.tar.gz
+  sha256: 6cca3920a89a5e51d259114804f3f4944133c1d3883d3f454162ccd3f3bd3c4d
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win]
   run_exports:
     # https://abi-laboratory.pro/?view=timeline&l=root
@@ -42,7 +42,7 @@ test:
     - pythia8
 
 about:
-  home: http://home.thep.lu.se/Pythia/
+  home: https://pythia.org/
   license: GPL-2.0-only
   license_file: COPYING
   summary: A tool for the generation of events in high-energy collisions
@@ -61,3 +61,4 @@ extra:
     - chrisburr
     - henryiii
     - ph-ilten
+    - matthewfeickert
