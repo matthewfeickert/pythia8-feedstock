@@ -11,7 +11,7 @@ source:
   sha256: 6cca3920a89a5e51d259114804f3f4944133c1d3883d3f454162ccd3f3bd3c4d
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   run_exports:
     # https://abi-laboratory.pro/?view=timeline&l=root
@@ -32,8 +32,9 @@ requirements:
     - python
     - libxcrypt  # [linux and py<39]
     - pybind11
-    - lhapdf >=6.2
-    - zlib >=1.0.0
+    - lhapdf
+    # zlib controlled through https://github.com/conda-forge/conda-forge-pinning-feedstock/
+    - zlib
   run:
     - python
 
