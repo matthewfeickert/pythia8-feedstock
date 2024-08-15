@@ -10,7 +10,7 @@ fi
 # Use pybind11 from conda-forge
 sed -i 's@overload_caster_t@override_caster_t@g' plugins/python/src/*.cpp
 rm -rf plugins/python/include/pybind11
-ln -s $PREFIX/include/pybind11 $PWD/plugins/python/include/pybind11
+ln -s "${PREFIX}/include/pybind11" "${PWD}/plugins/python/include/pybind11"
 
 # Have the compiler look for crypt.h in the conda include directory
 # for Python 3.8 builds
@@ -21,20 +21,29 @@ if [[ "${target_platform}" == linux-* ]]; then
     fi
 fi
 
+# debug information for logs
+./configure --help
+
 ./configure \
     --with-python-include="$(python -c "from sysconfig import get_paths; info = get_paths(); print(info['include'])")" \
     --with-python-bin="${PREFIX}/bin/" \
     --arch="${PYTHIA_ARCH}" \
     --prefix="${PREFIX}" \
-    --with-lhapdf6-bin="${PREFIX}/bin/" \
-    --with-lhapdf6-include="${PREFIX}/include/" \
-    --with-gzip-include="${PREFIX}/include/" \
+    --with-lhapdf6="${PREFIX}" \
+    --with-gzip="${PREFIX}" \
     --with-mg5mes
 
-make install -j${CPU_COUNT}
+make install --jobs="${CPU_COUNT}"
 
 # Make links so conda can find the bindings
-ln -s "${PREFIX}/lib/pythia8.so" "${SP_DIR}/"
+if [[ "${target_platform}" == linux-* ]]; then
+    # Use relative symlink to avoid conda-build having to patch it
+    # ('Making absolute symlink relative')
+    ln --symbolic --relative "${PREFIX}/lib/pythia8.so" "${SP_DIR}/"
+else
+    # macOS doesn't support relative symlinks
+    ln -s "${PREFIX}/lib/pythia8.so" "${SP_DIR}/"
+fi
 
 # Add the post activate/deactivate scripts
 mkdir -p "${PREFIX}/etc/conda/activate.d"

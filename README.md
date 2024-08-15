@@ -9,6 +9,10 @@ Package license: GPL-2.0-only
 
 Summary: A tool for the generation of events in high-energy collisions
 
+Development: https://gitlab.com/Pythia8/releases
+
+Documentation: https://pythia.org/
+
 The Pythia program is a standard tool for the generation of events in
 high-energy collisions, comprising a coherent set of physics models for
 the evolution from a few-body hard process to a complex multiparticle
