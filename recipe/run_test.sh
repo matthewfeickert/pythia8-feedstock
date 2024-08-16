@@ -128,3 +128,12 @@ fi
 
 "$CXX" main51.cc -o main51 $(pythia8-config --cxxflags --ldflags)
 ./main51 &> main51_output.txt
+
+
+# Need to figure out the version of HepMC3 to install
+# "$CXX" main46.cc \
+#     -o main46 \
+#     $(pythia8-config --cxxflags --ldflags) \
+#     -I $(pythia8-config --includedir)/highfive \
+#     -DHEPMC3
+# ./main46 main46.cmnd ttbar.hdf5 main46.hepmc
