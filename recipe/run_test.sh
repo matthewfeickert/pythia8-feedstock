@@ -84,6 +84,26 @@ else
 fi
 unset _with_mg5mes
 
+echo ""
+_with_hdf5=$(pythia8-config --with-hdf5)
+if [[ "${_with_hdf5}" == "true" ]]; then
+    echo -e "# pythia8-config --with-hdf5: ${_with_hdf5}"
+else
+    echo "pythia8-config --with-hdf5 is ${_with_hdf5} but should be true"
+    exit 1
+fi
+unset _with_hdf5
+
+echo ""
+_with_highfive=$(pythia8-config --with-highfive)
+if [[ "${_with_highfive}" == "true" ]]; then
+    echo -e "# pythia8-config --with-highfive: ${_with_highfive}"
+else
+    echo "pythia8-config --with-highfive is ${_with_highfive} but should be true"
+    exit 1
+fi
+unset _with_highfive
+
 #
 echo -e "\n# Test example main01"
 cd examples/
