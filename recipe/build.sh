@@ -31,7 +31,9 @@ fi
     --prefix="${PREFIX}" \
     --with-lhapdf6="${PREFIX}" \
     --with-gzip="${PREFIX}" \
-    --with-mg5mes
+    --with-mg5mes \
+    --with-hdf5="${PREFIX}" \
+    --with-highfive="${PREFIX}/include/highfive"
 
 make install --jobs="${CPU_COUNT}"
 

@@ -13,7 +13,7 @@ source:
     - patches/0001-fix-cfg_file-setting-in-configure-8.311.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
   run_exports:
     # https://abi-laboratory.pro/?view=timeline&l=root
@@ -31,12 +31,15 @@ requirements:
     - make
     - sed
   host:
+    # zlib and hdf5 versions controlled through global pinning
+    # https://github.com/conda-forge/conda-forge-pinning-feedstock/
     - python
     - libxcrypt  # [linux and py<39]
     - pybind11
     - lhapdf
-    # zlib controlled through https://github.com/conda-forge/conda-forge-pinning-feedstock/
     - zlib
+    - hdf5
+    - highfive >=2.2
   run:
     - python
     # zlib needed to be compatible with cxx-compiler
