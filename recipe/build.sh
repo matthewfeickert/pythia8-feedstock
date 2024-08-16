@@ -24,6 +24,7 @@ fi
 # debug information for logs
 ./configure --help
 
+# highfive is a header-only library, so just need the include directory
 ./configure \
     --with-python-include="$(python -c "from sysconfig import get_paths; info = get_paths(); print(info['include'])")" \
     --with-python-bin="${PREFIX}/bin/" \
@@ -33,7 +34,7 @@ fi
     --with-gzip="${PREFIX}" \
     --with-mg5mes \
     --with-hdf5="${PREFIX}" \
-    --with-highfive="${PREFIX}/include/highfive"
+    --with-highfive-include="${PREFIX}/include/highfive"
 
 make install --jobs="${CPU_COUNT}"
 
