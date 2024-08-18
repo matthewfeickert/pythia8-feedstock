@@ -50,6 +50,10 @@ test:
     - lhapdf >=6.2
     - make
     - cxx-compiler
+    # main46 requirements
+    - hdf5
+    - highfive >=2.2
+    - hepmc3
   imports:
     - pythia8
   source_files:

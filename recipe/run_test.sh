@@ -131,9 +131,9 @@ fi
 
 
 # Need to figure out the version of HepMC3 to install
-# "$CXX" main46.cc \
-#     -o main46 \
-#     $(pythia8-config --cxxflags --ldflags) \
-#     -I $(pythia8-config --includedir)/highfive \
-#     -DHEPMC3
+"$CXX" main46.cc \
+    -o main46 \
+    $(pythia8-config --cxxflags --ldflags) \
+    -I $(pythia8-config --includedir)/highfive \
+    -lhdf5 -lHepMC3 -DHEPMC3
 # ./main46 main46.cmnd ttbar.hdf5 main46.hepmc
