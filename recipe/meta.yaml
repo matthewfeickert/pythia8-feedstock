@@ -13,7 +13,7 @@ source:
     - patches/0001-fix-cfg_file-setting-in-configure-8.311.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
   run_exports:
     # https://abi-laboratory.pro/?view=timeline&l=root
@@ -39,11 +39,12 @@ requirements:
     - zlib
   run:
     - python
+    # zlib needed to be compatible with cxx-compiler
+    - zlib
 
 test:
   requires:
     - lhapdf >=6.2
-    - zlib
     - make
     - cxx-compiler
   imports:

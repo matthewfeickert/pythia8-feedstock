@@ -85,8 +85,14 @@ fi
 unset _with_mg5mes
 
 #
-echo -e "\n# Test example main51 that uses LHAPDF library extension"
+echo -e "\n# Test example main01"
 cd examples/
+make clean
+
+"$CXX" main01.cc -o main01 $(pythia8-config --cxxflags --ldflags)
+./main01 &> main01_output.txt
+
+echo -e "\n# Test example main51 that uses LHAPDF library extension"
 make clean
 # avoid lots of output to stdout from download of the file
 lhapdf install NNPDF31_nnlo_as_0118_luxqed &> /dev/null
@@ -101,4 +107,4 @@ else
 fi
 
 "$CXX" main51.cc -o main51 $(pythia8-config --cxxflags --ldflags)
-./main51
+./main51 &> main51_output.txt
