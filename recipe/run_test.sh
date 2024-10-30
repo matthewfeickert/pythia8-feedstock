@@ -85,12 +85,12 @@ fi
 unset _with_mg5mes
 
 #
-echo -e "\n# Test example main01"
+echo -e "\n# Test example main101"
 cd examples/
 make clean
 
-"$CXX" main01.cc -o main01 $(pythia8-config --cxxflags --ldflags)
-./main01 &> main01_output.txt
+"$CXX" main101.cc -o main101 $(pythia8-config --cxxflags --ldflags)
+./main101 &> main101_output.txt
 
 echo -e "\n# Test example main51 that uses LHAPDF library extension"
 make clean
@@ -100,11 +100,11 @@ lhapdf install NNPDF31_nnlo_as_0118_luxqed &> /dev/null
 # The examples assume you built locally and didn't install, so need to patch
 # the relative path (../share) to the absolute path ($PREFIX/share)
 if [[ "${target_platform}" == linux-* ]]; then
-    sed -i "s|../share|$(readlink -f $PREFIX/share)|g" main51.cc
+    sed -i "s|../share|$(readlink -f $PREFIX/share)|g" main201.cc
 else
     # macOS
-    sed -i '' "s|../share|$(readlink -f $PREFIX/share)|g" main51.cc
+    sed -i '' "s|../share|$(readlink -f $PREFIX/share)|g" main201.cc
 fi
 
-"$CXX" main51.cc -o main51 $(pythia8-config --cxxflags --ldflags)
-./main51 &> main51_output.txt
+"$CXX" main201.cc -o main201 $(pythia8-config --cxxflags --ldflags)
+./main201 &> main201_output.txt
