@@ -16,6 +16,13 @@ echo "# test -d ${PREFIX}/share/Pythia8"
 test -d "${PREFIX}/share/Pythia8"
 echo "# test -d ${PREFIX}/share/Pythia8/examples"
 test -d "${PREFIX}/share/Pythia8/examples"
+echo "# test -d ${PREFIX}/share/Pythia8/xmldoc"
+test -d "${PREFIX}/share/Pythia8/xmldoc"
+
+echo "# test ! -d ${PREFIX}/share/Pythia8/htmldoc"
+test ! -d "${PREFIX}/share/Pythia8/htmldoc"
+echo "# test ! -d ${PREFIX}/share/Pythia8/pdfdoc"
+test ! -d "${PREFIX}/share/Pythia8/pdfdoc"
 
 echo -e "\n# Check installed files"
 echo "# test -f ${PREFIX}/bin/pythia8-config"
@@ -55,6 +62,16 @@ fi
 unset _with_lhapdf6
 
 echo ""
+_with_fastjet3=$(pythia8-config --with-fastjet3)
+if [[ "${_with_fastjet3}" == "true" ]]; then
+    echo -e "# pythia8-config --with-fastjet3: ${_with_fastjet3}"
+else
+    echo "pythia8-config --with-fastjet3 is ${_with_fastjet3} but should be true"
+    exit 1
+fi
+unset _with_fastjet3
+
+echo ""
 _with_gzip=$(pythia8-config --with-gzip)
 if [[ "${_with_gzip}" == "true" ]]; then
     echo -e "# pythia8-config --with-gzip: ${_with_gzip}"
@@ -92,19 +109,28 @@ make clean
 "$CXX" main101.cc -o main101 $(pythia8-config --cxxflags --ldflags)
 ./main101 &> main101_output.txt
 
-echo -e "\n# Test example main51 that uses LHAPDF library extension"
+echo -e "\n# Test example main161 that uses the FastJet library extension"
+make clean
+# avoid lots of output to stdout from download of the file
+lhapdf install cteq6l1 &> /dev/null
+
+"$CXX" main161.cc -o main161 $CXXFLAGS $LDFLAGS -lpythia8 -lfastjet
+./main161 main161.cmnd w+_production_lhc_0.lhe histout161.dat &> main161_output.txt
+
+echo -e "\n# Test example main201 that uses the LHAPDF library extension"
 make clean
 # avoid lots of output to stdout from download of the file
 lhapdf install NNPDF31_nnlo_as_0118_luxqed &> /dev/null
 
 # The examples assume you built locally and didn't install, so need to patch
 # the relative path (../share) to the absolute path ($PREFIX/share)
-if [[ "${target_platform}" == linux-* ]]; then
-    sed -i "s|../share|$(readlink -f $PREFIX/share)|g" main201.cc
-else
-    # macOS
-    sed -i '' "s|../share|$(readlink -f $PREFIX/share)|g" main201.cc
-fi
+sed -i "s|../share|$(readlink -f $PREFIX/share)|g" main201.cc
 
 "$CXX" main201.cc -o main201 $(pythia8-config --cxxflags --ldflags)
 ./main201 &> main201_output.txt
+
+echo -e "\n# Test example main212 that uses the FastJet library extension"
+make clean
+
+"$CXX" main212.cc -o main212 $CXXFLAGS $LDFLAGS -lpythia8 -lfastjet
+./main212 &> main212_output.txt
