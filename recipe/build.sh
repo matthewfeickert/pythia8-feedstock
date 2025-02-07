@@ -38,11 +38,14 @@ make install --jobs="${CPU_COUNT}"
 make clean
 
 # Remove documentation and examples from share/Pythia8 as not needed for runtime.
-# Keep share/Pythia8/examples/Makefile.inc as that might be looked for.
+# Keep share/Pythia8/examples/Makefile.inc and share/Pythia8/examples/Makefile as
+# they might be looked for.
 # Keep share/Pythia8/xmldoc as required at runtime.
 mv $PREFIX/share/Pythia8/examples/Makefile.inc .
+mv $PREFIX/share/Pythia8/examples/Makefile .
 rm -rf $PREFIX/share/Pythia8/examples/*
 mv Makefile.inc $PREFIX/share/Pythia8/examples/Makefile.inc
+mv Makefile $PREFIX/share/Pythia8/examples/Makefile
 rm -rf $PREFIX/share/Pythia8/htmldoc
 rm -rf $PREFIX/share/Pythia8/pdfdoc
 
