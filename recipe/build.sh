@@ -31,6 +31,8 @@ fi
     --prefix="${PREFIX}" \
     --with-lhapdf6="${PREFIX}" \
     --with-fastjet3="${PREFIX}" \
+    --with-hepmc2="${PREFIX}" \
+    --with-hepmc3="${PREFIX}" \
     --with-gzip="${PREFIX}" \
     --with-mg5mes
 
