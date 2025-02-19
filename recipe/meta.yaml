@@ -1,7 +1,7 @@
 {% set name = "pythia8" %}
 {% set file_version = "8311" %}
 {% set version = file_version[0] + "." + file_version[1:] %}
-{% set build = 5 %}
+{% set build = 6 %}
 
 package:
   name: {{ name|lower }}
@@ -43,6 +43,8 @@ requirements:
     - pybind11
     - lhapdf
     - fastjet-cxx
+    - hepmc2
+    - hepmc3
     # zlib controlled through https://github.com/conda-forge/conda-forge-pinning-feedstock/
     - zlib
   run:
@@ -55,6 +57,8 @@ test:
     - {{ compiler('cxx') }}
     - lhapdf >=6.2
     - fastjet-cxx
+    - hepmc2
+    - hepmc3
     - make
     - sed
   imports:
@@ -62,11 +66,22 @@ test:
   source_files:
     - examples/Makefile
     - examples/main01.cc
+    - examples/main41.cc
+    - examples/main42.cc
+    - examples/main42.cmnd
+    - examples/main43.cc
+    - examples/main43.cmnd
+    - examples/main44.cc
+    - examples/main44.cmnd
+    - examples/main45.cc
     - examples/main51.cc
     - examples/main72.cc
     - examples/main81.cc
     - examples/main81.cmnd
     - examples/w+_production_lhc_0.lhe
+    - examples/ttbar.lhe
+    - examples/ttbar2.lhe
+    - examples/wbj_lhef3.lhe
 
 about:
   home: https://pythia.org/
