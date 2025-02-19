@@ -1,7 +1,7 @@
 {% set name = "pythia8" %}
 {% set file_version = "8312" %}
 {% set version = file_version[0] + "." + file_version[1:] %}
-{% set build = 3 %}
+{% set build = 4 %}
 
 package:
   name: {{ name|lower }}

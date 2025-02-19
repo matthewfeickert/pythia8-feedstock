@@ -39,6 +39,9 @@ fi
 make install --jobs="${CPU_COUNT}"
 make clean
 
+# Patch out $BUILD_PREFIX from the path for CXX
+sed -i "s|$BUILD_PREFIX|$PREFIX|g" $PREFIX/share/Pythia8/examples/Makefile.inc
+
 # Remove documentation and examples from share/Pythia8 as not needed for runtime.
 # Keep share/Pythia8/examples/Makefile.inc and share/Pythia8/examples/Makefile as
 # they might be looked for.
