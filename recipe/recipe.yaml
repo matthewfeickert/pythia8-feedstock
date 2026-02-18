@@ -1,0 +1,114 @@
+schema_version: 1
+
+context:
+  name: pythia8
+  file_version: 8312
+  version: ${{ file_version[0] + "." + file_version[1:] }}
+  build: 6
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://gitlab.com/Pythia8/releases/-/archive/pythia${{ file_version }}/releases-pythia${{ file_version }}.tar.gz
+  sha256: c1a33aa5fa15e6b70d7946ce6d237246842887ec84ea0b35dfc2535c868a2770
+
+build:
+  # Prioritize builds with a higher microarch level.
+  # microarch_level 4 not supported yet.
+  # c.f. https://github.com/conda-forge/microarch-level-feedstock/issues/5
+  # number: {{ build + 100 }}    # [unix and x86_64 and microarch_level == 1]
+  # number: {{ build + 300 }}    # [unix and x86_64 and microarch_level == 3]
+  number: ${{ build if not (unix and x86_64) else '' }}
+  skip: win
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: python
+    - if: build_platform != target_platform
+      then: cross-python_${{ target_platform }}
+    - if: unix and x86_64
+      then: x86_64-microarch-level ${{ microarch_level }}
+    - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - rsync
+    - make
+    - sed
+  host:
+    - python
+    - if: linux and match(python, "<3.9")
+      then: libxcrypt
+    - pybind11
+    - lhapdf
+    - fastjet-cxx
+    - hepmc2
+    - hepmc3
+    # zlib controlled through https://github.com/conda-forge/conda-forge-pinning-feedstock/
+    - zlib
+  run:
+    - python
+    # zlib needed to be compatible with cxx-compiler
+    - zlib
+  run_exports:
+    - pythia8 >=${{ version }},<${{ version.split('.')[0] }}.${{ (version.split('.')[1][0]|int) + 1 }}00.0a0
+
+tests:
+  - python:
+      imports:
+        - pythia8
+  - files:
+      source:
+        - examples/Makefile
+        - examples/main101.cc
+        - examples/main131.cc
+        - examples/main132.cc
+        - examples/main132.cmnd
+        - examples/main133.cc
+        - examples/main133.cmnd
+        - examples/main134.cc
+        - examples/main134.cmnd
+        - examples/main135.cc
+        - examples/main161.cc
+        - examples/main161.cmnd
+        - examples/main201.cc
+        - examples/main212.cc
+        - examples/w+_production_lhc_0.lhe
+        - examples/ttbar.lhe
+        - examples/ttbar2.lhe
+        - examples/wbj_lhef3.lhe
+    requirements:
+      run:
+        - ${{ compiler('cxx') }}
+        - lhapdf >=6.2
+        - fastjet-cxx
+        - hepmc2
+        - hepmc3
+        - make
+        - sed
+
+about:
+  license: GPL-2.0-only
+  license_file: COPYING
+  summary: A tool for the generation of events in high-energy collisions
+  description: |
+    The Pythia program is a standard tool for the generation of events in
+    high-energy collisions, comprising a coherent set of physics models for
+    the evolution from a few-body hard process to a complex multiparticle
+    final state. It contains a library of hard processes, models for initial-
+    and final-state parton showers, matching and merging methods between hard
+    processes and parton showers, multiparton interactions, beam remnants,
+    string fragmentation and particle decays. It also has a set of utilities
+    and several interfaces to external programs.
+  homepage: https://pythia.org/
+  repository: https://gitlab.com/Pythia8/releases
+  documentation: https://pythia.org/
+
+extra:
+  recipe-maintainers:
+    - chrisburr
+    - henryiii
+    - ph-ilten
+    - matthewfeickert
