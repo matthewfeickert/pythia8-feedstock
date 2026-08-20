@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: pythia8
-  file_version: 8312
+  file_version: "8312"
   version: ${{ file_version[0] + "." + file_version[1:] }}
   build: 6
 
@@ -30,7 +30,7 @@ requirements:
     - if: build_platform != target_platform
       then: cross-python_${{ target_platform }}
     - if: unix and x86_64
-      then: x86_64-microarch-level ${{ microarch_level }}
+      then: x86_64-microarch-level ==${{ microarch_level }}
     - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
@@ -53,7 +53,7 @@ requirements:
     # zlib needed to be compatible with cxx-compiler
     - zlib
   run_exports:
-    - pythia8 >=${{ version }},<${{ version.split('.')[0] }}.${{ (version.split('.')[1][0]|int) + 1 }}00.0a0
+    - pythia8 >=${{ version }},<${{ file_version[0] }}.${{ (file_version[1] | int) + 1 }}00.0a0
 
 tests:
   - package_contents:
