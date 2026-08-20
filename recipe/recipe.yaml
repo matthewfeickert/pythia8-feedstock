@@ -81,7 +81,7 @@ tests:
         - examples/wbj_lhef3.lhe
     requirements:
       run:
-        - ${{ compiler('cxx') }}
+        - cxx-compiler
         - lhapdf >=6.2
         - fastjet-cxx
         - hepmc2
