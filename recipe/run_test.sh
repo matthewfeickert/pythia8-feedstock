@@ -80,10 +80,20 @@ else
 fi
 unset _with_mg5mes
 
-#
-echo -e "\n# Test example main101"
 cd examples/
 make clean
+
+# The v2+ versions of conda-forge compiler metapackages install minimally
+# activated compilers where the compiler toolchain works by explicit name
+# but environmental variables like CXX are no longer set.
+# c.f. https://github.com/conda-forge/conda-forge.github.io/issues/2595
+if [[ -z "${CXX:-}" ]]; then
+    if [[ "$(uname)" == "Darwin" ]]; then
+        CXX="clang++"
+    else
+        CXX="g++"
+    fi
+fi
 
 "$CXX" main101.cc -o main101 $(pythia8-config --cxxflags --ldflags)
 ./main101 &> main101_output.txt || ./main101
@@ -119,26 +129,26 @@ sed -i "s|../share|$(readlink -f $PREFIX/share)|g" main201.cc
 echo -e "\n# Test example main212 that uses the FastJet library extension"
 make clean
 
-"$CXX" main212.cc -o main212 $CXXFLAGS $LDFLAGS -lpythia8 -lfastjet
+"$CXX" main212.cc -o main212 $(pythia8-config --cxxflags --ldflags) -lpythia8 -lfastjet
 ./main212 &> main212_output.txt || ./main212
 
 echo -e "\n# Test example that use the HepMC2 and HepMC3 extensions"
-"$CXX" main131.cc -o main131 $CXXFLAGS $LDFLAGS -lpythia8 -lHepMC3
+"$CXX" main131.cc -o main131 $(pythia8-config --cxxflags --ldflags) -lpythia8 -lHepMC3
 ./main131 &> main131_output.txt || ./main131
 test -f main131.hepmc
 
-"$CXX" main132.cc -o main132 $CXXFLAGS $LDFLAGS -lpythia8 -lHepMC3
+"$CXX" main132.cc -o main132 $(pythia8-config --cxxflags --ldflags) -lpythia8 -lHepMC3
 ./main132 main132.cmnd main132.hepmc &> main132_output.txt || ./main132 main132.cmnd main132.hepmc
 test -f main132.hepmc
 
-"$CXX" main133.cc -o main133 $CXXFLAGS $LDFLAGS -lpythia8 -lHepMC3
+"$CXX" main133.cc -o main133 $(pythia8-config --cxxflags --ldflags) -lpythia8 -lHepMC3
 ./main133 main133.cmnd main133.hepmc &> main133_output.txt || ./main133 main133.cmnd main133.hepmc
 test -f main133.hepmc
 
-"$CXX" main134.cc -o main134 $CXXFLAGS $LDFLAGS -lpythia8 -lHepMC3
+"$CXX" main134.cc -o main134 $(pythia8-config --cxxflags --ldflags) -lpythia8 -lHepMC3
 ./main134 main134.cmnd main134.hepmc &> main134_output.txt || ./main134 main134.cmnd main134.hepmc
 test -f main134.hepmc
 
-"$CXX" main135.cc -o main135 $CXXFLAGS $LDFLAGS -lpythia8 -lHepMC3
+"$CXX" main135.cc -o main135 $(pythia8-config --cxxflags --ldflags) -lpythia8 -lHepMC3
 ./main135 &> main135_output.txt || ./main135
 test -f main135.hepmc
