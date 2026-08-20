@@ -1,32 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -x
-
-echo -e "\n# Check installed directory structure"
-test -d "${PREFIX}/bin"
-test -d "${PREFIX}/include"
-test -d "${PREFIX}/include/Pythia8"
-test -d "${PREFIX}/lib"
-test -d "${PREFIX}/share"
-test -d "${PREFIX}/share/Pythia8"
-test -d "${PREFIX}/share/Pythia8/examples"
-test -d "${PREFIX}/share/Pythia8/xmldoc"
-
-test ! -d "${PREFIX}/share/Pythia8/htmldoc"
-test ! -d "${PREFIX}/share/Pythia8/pdfdoc"
-
-echo -e "\n# Check installed files"
-test -f "${PREFIX}/bin/pythia8-config"
-test -f "${PREFIX}/include/Pythia8/Pythia.h"
-test -f "${PREFIX}/lib/libpythia8${SHLIB_EXT}"
-test -f "${PREFIX}/lib/libpythia8lhapdf6.so"
-test -f "${PREFIX}/share/Pythia8/examples/Makefile"
-test -f "${PREFIX}/share/Pythia8/examples/Makefile.inc"
+set -ex
 
 cat ${PREFIX}/share/Pythia8/examples/Makefile.inc
 
-#
-echo -e "\n# Check pythia8-config CLI API and flags return expected values"
 pythia8-config --help
 
 pythia8-config --cxxflags

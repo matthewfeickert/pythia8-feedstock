@@ -56,6 +56,22 @@ requirements:
     - pythia8 >=${{ version }},<${{ version.split('.')[0] }}.${{ (version.split('.')[1][0]|int) + 1 }}00.0a0
 
 tests:
+  - package_contents:
+      bin:
+        - pythia8-config
+      lib:
+        - pythia8
+        - pythia8lhapdf6
+      include:
+        - Pythia8/Pythia.h
+      files:
+        exists:
+          - share/Pythia8/examples/Makefile
+          - share/Pythia8/examples/Makefile.inc
+        not_exists:
+          - share/Pythia8/htmldoc
+          - share/Pythia8/pdfdoc
+
   - python:
       imports:
         - pythia8
