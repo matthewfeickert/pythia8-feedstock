@@ -104,6 +104,7 @@ tests:
         - hepmc3
         - make
         - sed
+    script: bash ${RECIPE_DIR}/run_test.sh
 
 about:
   license: GPL-2.0-only
